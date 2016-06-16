@@ -29,6 +29,11 @@ class account_move_line(osv.osv):
         'deposit_id': fields.many2one('deposit.ticket', 'Deposit Ticket')
     }
 
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        default = default or {}
+        default.update({'draft_assigned' : False})
+        return super(account_move_line, self).copy_data(cr, uid, id, default=default, context=context)
+
 account_move_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
